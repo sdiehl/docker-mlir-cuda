@@ -38,17 +38,17 @@ RUN sudo apt-get -y install cuda-toolkit-12-8
 # RUN sudo apt-get install -y cuda-drivers
 
 # Install Nanobind
-RUN git clone https://github.com/wjakob/nanobind && \
-  cd nanobind && \
-  git submodule update --init --recursive && \
-  cmake \
-    -G Ninja \
-    -B build \
-    -DCMAKE_CXX_COMPILER=clang++ \
-    -DCMAKE_C_COMPILER=clang \
-    -DCMAKE_INSTALL_PREFIX=$HOME/usr && \
-  cmake --build build --target install && \
-  cd
+# RUN git clone https://github.com/wjakob/nanobind && \
+#   cd nanobind && \
+#   git submodule update --init --recursive && \
+#   cmake \
+#     -G Ninja \
+#     -B build \
+#     -DCMAKE_CXX_COMPILER=clang++ \
+#     -DCMAKE_C_COMPILER=clang \
+#     -DCMAKE_INSTALL_PREFIX=$HOME/usr && \
+#   cmake --build build --target install && \
+#   cd
 
 # Build MLIR (from snapshot)
 RUN wget -nv https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-20.1.0.tar.gz && \
