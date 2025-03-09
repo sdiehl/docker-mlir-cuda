@@ -32,6 +32,10 @@ RUN sudo dpkg -i cuda-keyring_1.0-1_all.deb
 RUN sudo apt-get -y update
 RUN sudo apt-get -y install build-essential
 RUN sudo apt-get -y install cuda-toolkit-12-8
+# RUN sudo apt-get -y install libcudnn8 libcudnn8-dev libcublas-dev
+
+# Install CUDA Drivers
+# RUN sudo apt-get install -y cuda-drivers
 
 # Install Nanobind
 RUN git clone https://github.com/wjakob/nanobind && \
@@ -55,7 +59,7 @@ RUN cmake -G Ninja ../llvm \
    -DLLVM_BUILD_EXAMPLES=ON \
    -DLLVM_TARGETS_TO_BUILD="Native;NVPTX;AMDGPU" \
    -DCMAKE_BUILD_TYPE=Release \
-   -DMLIR_ENABLE_BINDINGS_PYTHON=On \
+   # -DMLIR_ENABLE_BINDINGS_PYTHON=On \
    -DLLVM_ENABLE_ASSERTIONS=ON \
    -DLLVM_CCACHE_BUILD=ON \
    -DMLIR_ENABLE_CUDA_RUNNER=ON \
