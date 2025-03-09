@@ -10,6 +10,7 @@
         8080
     ],
     "containerEnv": {
-        "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
-    },
+        "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}",
+        "GITHUB_USER": "${localEnv:GITHUB_USER}"
+    }
 }
