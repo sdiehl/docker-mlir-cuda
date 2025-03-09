@@ -1,0 +1,13 @@
+{
+    "name": "MLIR CUDA Dev Container",
+    "build": {
+        "dockerfile": "../Dockerfile"
+    },
+    "extensions": [
+        "ms-vscode.cpptools",
+        "ms-python.python"
+    ],
+    "forwardPorts": [
+        8080
+    ]
+}
