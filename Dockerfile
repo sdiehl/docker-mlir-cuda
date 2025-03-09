@@ -31,7 +31,7 @@ RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86
 RUN sudo dpkg -i cuda-keyring_1.0-1_all.deb
 RUN sudo apt-get -y update
 RUN sudo apt-get -y install build-essential
-RUN sudo apt-get -y install cuda-toolkit-12-x
+RUN sudo apt-get -y install cuda-toolkit-12-8
 
 # Build MLIR
 RUN git clone https://github.com/llvm/llvm-project.git
