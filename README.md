@@ -3,7 +3,7 @@
 Installs the necessary dependencies for building:
 
 1. LLVM 20
-2. MLIR (With CuDA support)
+2. MLIR (With CUDA support)
 3. nvcc
 4. cuDNN & cuBLAS
 
