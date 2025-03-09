@@ -10,15 +10,6 @@ Installs the following:
 3. nvcc
 4. cuDNN & cuBLAS
 
-CUDA binaries are installed to `/usr/local/cuda/bin/` and the CUDA libraries are installed to `/usr/local/cuda/lib64/`.
-
-To append to your paths add the following to `~/.bashrc`:
-
-```bash
-export PATH=/usr/local/cuda/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
-```
-
 ## Downloading
 
 ```bash
@@ -67,3 +58,14 @@ You can use this development environment directly in GitHub Codespaces:
 4. Click "Create codespace on main"
 5. In the options dialog, select "MLIR CUDA Dev Container" as the base image
 6. Wait for the codespace to build and start
+
+## Notes
+
+CUDA binaries are installed to `/usr/local/cuda/bin/` and the CUDA libraries are installed to `/usr/local/cuda/lib64/`.
+
+To append to your paths add the following to `~/.bashrc`:
+
+```bash
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+```

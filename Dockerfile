@@ -83,4 +83,8 @@ RUN cmake -G Ninja ../llvm \
 # RUN cmake --build build -t mlir-opt mlir-translate mlir-transform-opt mlir-cpu-runner check-mlir || true
 RUN cmake --build . -t mlir-opt mlir-translate mlir-transform-opt mlir-runner
 RUN cmake --build . -t install
+
+# Delete the build directory
+RUN rm -rf /llvm-project/build
+
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
