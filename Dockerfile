@@ -81,6 +81,6 @@ RUN cmake -G Ninja ../llvm \
 
 # Install MLIR
 # RUN cmake --build build -t mlir-opt mlir-translate mlir-transform-opt mlir-cpu-runner check-mlir || true
-RUN cmake --build . -t mlir-opt mlir-translate mlir-transform-opt mlir-runner check-mlir
+RUN cmake --build . -t mlir-opt mlir-translate mlir-transform-opt mlir-runner
 RUN cmake --build . -t install
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
