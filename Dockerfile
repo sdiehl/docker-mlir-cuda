@@ -51,7 +51,7 @@ RUN git clone https://github.com/wjakob/nanobind && \
   cd
 
 # Build MLIR (from snapshot)
-RUN wget https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-20.1.0.tar.gz && \
+RUN wget -nv https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-20.1.0.tar.gz && \
   tar -xvf llvmorg-20.1.0.tar.gz && \
   mv llvm-project-llvmorg-20.1.0 llvm-project
 
@@ -61,9 +61,13 @@ RUN wget https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-20.1.0.t
 
 WORKDIR llvm-project/build
 RUN cmake -G Ninja ../llvm \
+   -DCUDACXX=/usr/local/cuda/bin/nvcc \
+   -DCUDA_PATH=/usr/local/cuda \
+   -DCMAKE_CUDA_ARCHITECTURES="75;80;86" \
+   #-DCMAKE_CUDA_ARCHITECTURES="native" \
    -DCMAKE_C_COMPILER=clang \
    -DCMAKE_CXX_COMPILER=clang++ \
-   -DCMAKE_CUDA_COMPILER=nvcc \
+   -DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc \
    -DLLVM_ENABLE_PROJECTS=mlir \
    -DLLVM_BUILD_EXAMPLES=ON \
    -DLLVM_TARGETS_TO_BUILD="Native;NVPTX;AMDGPU" \
