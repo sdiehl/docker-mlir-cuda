@@ -7,6 +7,15 @@ Installs the necessary dependencies for building:
 3. nvcc
 4. cuDNN & cuBLAS
 
+CUDA binaries are installed to `/usr/local/cuda/bin/` and the CUDA libraries are installed to `/usr/local/cuda/lib64/`.
+
+To append to your paths add the following to `~/.bashrc`:
+
+```bash
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+```
+
 ## Downloading
 
 ```bash
