@@ -39,6 +39,15 @@ jobs:
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
     
+    - name: Install ccache
+      run: sudo apt-get install -y ccache
+
+    - name: Configure ccache
+      run: |
+        export PATH="/usr/lib/ccache:$PATH"
+        export CC="ccache gcc"
+        export CXX="ccache g++"
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
@@ -48,3 +57,5 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
+        build-args: |
+          CCACHE_DIR=/tmp/.ccache
