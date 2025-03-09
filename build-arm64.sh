@@ -2,7 +2,7 @@
 
 # Configuration
 IMAGE_NAME="ghcr.io/sdiehl/docker-mlir-cuda"
-TAG="main"
+TAG="main-arm64"
 FULL_IMAGE_NAME="${IMAGE_NAME}:${TAG}"
 
 # Ensure script fails on any error
@@ -16,10 +16,13 @@ if ! docker login ghcr.io; then
     exit 1
 fi
 
-echo "Building Docker image..."
-docker build -t ${FULL_IMAGE_NAME} .
+echo "Building Docker image for ARM64..."
+docker buildx create --use --name arm64_builder || true
 
-echo "Pushing image to GitHub Container Registry..."
-docker push ${FULL_IMAGE_NAME}
+docker buildx build \
+  --platform linux/arm64 \
+  --tag ${FULL_IMAGE_NAME} \
+  --push \
+  .
 
-echo "Successfully built and pushed ${FULL_IMAGE_NAME}"
+echo "Successfully built and pushed ${FULL_IMAGE_NAME} for ARM64"
