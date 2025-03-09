@@ -33,6 +33,19 @@ RUN sudo apt-get -y update
 RUN sudo apt-get -y install build-essential
 RUN sudo apt-get -y install cuda-toolkit-12-8
 
+# Install Nanobind
+RUN git clone https://github.com/wjakob/nanobind && \
+  cd nanobind && \
+  git submodule update --init --recursive && \
+  cmake \
+    -G Ninja \
+    -B build \
+    -DCMAKE_CXX_COMPILER=clang++ \
+    -DCMAKE_C_COMPILER=clang \
+    -DCMAKE_INSTALL_PREFIX=$HOME/usr && \
+  cmake --build build --target install && \
+  cd
+
 # Build MLIR
 RUN git clone https://github.com/llvm/llvm-project.git
 RUN mkdir llvm-project/build
@@ -49,5 +62,6 @@ RUN cmake -G Ninja ../llvm \
    -DMLIR_ENABLE_NVPTXCOMPILER=ON
 
 # Install MLIR
-RUN cmake --build build -t mlir-opt mlir-translate mlir-transform-opt mlir-cpu-runner check-mlir || true
+# RUN cmake --build build -t mlir-opt mlir-translate mlir-transform-opt mlir-cpu-runner check-mlir || true
+RUN cmake --build build -t mlir-opt mlir-translate mlir-transform-opt mlir-cpu-runner || true
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
