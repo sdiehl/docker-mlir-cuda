@@ -56,3 +56,14 @@ This repository includes a `devcontainer.json` file in the `.devcontainer` direc
 5. When prompted, reopen the repository in a container.
 
 This will build and start a development container using the settings specified in the `devcontainer.json` file.
+
+## Using with GitHub Codespaces
+
+You can use this development environment directly in GitHub Codespaces:
+
+1. Navigate to the repository on GitHub
+2. Click the "Code" button
+3. Select the "Codespaces" tab
+4. Click "Create codespace on main"
+5. In the options dialog, select "MLIR CUDA Dev Container" as the base image
+6. Wait for the codespace to build and start
