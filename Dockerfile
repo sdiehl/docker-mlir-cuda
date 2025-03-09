@@ -29,8 +29,8 @@ RUN sudo apt-get install -y \
 # Install CUDA
 RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.0-1_all.deb
 RUN sudo dpkg -i cuda-keyring_1.0-1_all.deb
-RUN sudo apt-get update
-RUN sudo apt-get install build-essential
+RUN sudo apt-get -y update
+RUN sudo apt-get -y install build-essential
 RUN sudo apt-get -y install cuda-toolkit-12-x
 
 # Build MLIR
