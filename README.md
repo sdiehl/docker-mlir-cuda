@@ -1,6 +1,9 @@
 # Dev Environment for MLIR
 
-Installs the necessary dependencies for building:
+Use if you need a one-click development container that has CUDA and MLIR
+precompiled. Because building this from source sucks so much.
+
+Installs the following:
 
 1. LLVM 20
 2. MLIR (With CUDA support)
