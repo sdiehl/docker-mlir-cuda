@@ -1,4 +1,5 @@
-FROM ubuntu:24.10
+# FROM ubuntu:24.10
+FROM nvidia/cuda:12.8.0-cudnn-devel-ubuntu24.04
 
 # Update Linux
 ENV DEBIAN_FRONTEND=noninteractive
@@ -72,7 +73,7 @@ RUN cmake -G Ninja ../llvm \
    -DLLVM_BUILD_EXAMPLES=ON \
    -DLLVM_TARGETS_TO_BUILD="Native;NVPTX;AMDGPU" \
    -DCMAKE_BUILD_TYPE=Release \
-   # -DMLIR_ENABLE_BINDINGS_PYTHON=On \
+   # -DMLIR_ENABLE_BINDINGS_PYTHON=ON \
    -DLLVM_ENABLE_ASSERTIONS=ON \
    -DLLVM_CCACHE_BUILD=ON \
    -DMLIR_ENABLE_CUDA_RUNNER=ON \

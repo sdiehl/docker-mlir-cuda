@@ -3,6 +3,14 @@
 Use if you need a one-click development container that has CUDA and MLIR
 precompiled. Because building this from source sucks so much.
 
+To use one of the cloud IDEs, just click the button below.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/sdiehl/docker-mlir-cuda)
+
+[![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/sdiehl/docker-mlir-cuda)
+
+## Contents
+
 Installs the following:
 
 1. LLVM 20
