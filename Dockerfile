@@ -15,12 +15,14 @@ RUN sudo apt-get install -y \
   cmake \
   cmake-curses-gui \
   git \
+  curl \
   lld \
   man-db \
   ninja-build \
   pybind11-dev \
   python3 \
   python3-numpy \
+  python3-pip \
   python3-pybind11 \
   python3-yaml \
   unzip \
@@ -33,7 +35,8 @@ RUN sudo dpkg -i cuda-keyring_1.0-1_all.deb
 RUN sudo apt-get -y update
 RUN sudo apt-get -y install build-essential
 RUN sudo apt-get -y install cuda-toolkit-12-8
-# RUN sudo apt-get -y install libcudnn8 libcudnn8-dev libcublas-dev
+# RUN sudo apt-get -y install libcudnn8 libcudnn8-dev
+# RUN sudo apt-get -y install libcublas-dev
 
 # Install CUDA Drivers
 # RUN sudo apt-get install -y cuda-drivers
@@ -87,5 +90,10 @@ RUN cmake --build . -t install
 
 # Delete the build directory
 RUN rm -rf /llvm-project/build
+
+RUN curl -sSL https://install.python-poetry.org | python3 -
+
+# ADD /usr/local/cuda/bin to the PATH in .bashrc
+RUN echo "export PATH=/usr/local/cuda/bin:$PATH" >> ~/.bashrc
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
