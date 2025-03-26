@@ -1,6 +1,6 @@
 {
     "name": "MLIR CUDA Dev Container",
-    "image": "ghcr.io/sdiehl/docker-mlir-cuda:main",
+    "build": { "dockerfile": "Dockerfile" },
     "initializeCommand": "sh .devcontainer/setup.sh",
     "extensions": [
         "ms-vscode.cpptools",
