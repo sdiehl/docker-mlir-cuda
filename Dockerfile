@@ -12,6 +12,10 @@ ARG CUDA_ENABLED
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
 
+# Pre-configure tzdata
+RUN echo "tzdata tzdata/Areas select Etc" | debconf-set-selections && \
+    echo "tzdata tzdata/Zones/Etc select UTC" | debconf-set-selections
+
 # Update Linux
 RUN apt-get update
 RUN apt-get install -y sudo
