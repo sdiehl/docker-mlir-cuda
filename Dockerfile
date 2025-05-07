@@ -59,9 +59,8 @@ RUN ln -s /usr/bin/mlir-opt-${MLIR_VERSION} /usr/bin/mlir-opt
 # Install uv for Python package management
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
-# Upgrade pip and install MLIR Python bindings
-RUN python3 -m pip install --upgrade pip
-RUN pip install --break-system-packages mlir-python-bindings -f https://github.com/makslevental/mlir-wheels/releases/expanded_assets/latest
+# Install MLIR Python bindings
+RUN pip install --no-warn-script-location mlir-python-bindings -f https://github.com/makslevental/mlir-wheels/releases/expanded_assets/latest
 
 # Set environment variables
 ENV MLIR_VERSION=${MLIR_VERSION}
