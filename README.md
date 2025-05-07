@@ -51,17 +51,6 @@ Or in your Dockerfile:
 FROM ghcr.io/sdiehl/docker-mlir-cuda:<tag>
 ```
 
-## Building
-
-To build the image locally:
-
-```bash
-git clone git@github.com:sdiehl/docker-mlir-cuda.git
-cd docker-mlir-cuda
-docker build -t mlir-dev .
-docker run -it mlir-dev bash
-```
-
 ## Using the Devcontainer with Visual Studio Code
 
 This repository includes a `devcontainer.json` file in the `.devcontainer` directory. This allows you to use Visual Studio Code's Remote - Containers extension to develop inside a container.
