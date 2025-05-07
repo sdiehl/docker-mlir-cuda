@@ -12,13 +12,11 @@ ARG CUDA_ENABLED
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
 
-# Pre-configure tzdata
-RUN echo "tzdata tzdata/Areas select Etc" | debconf-set-selections && \
-    echo "tzdata tzdata/Zones/Etc select UTC" | debconf-set-selections
-
-# Update Linux
-RUN apt-get update
-RUN apt-get install -y sudo
+# Update Linux and install tzdata first
+RUN DEBIAN_FRONTEND=noninteractive TZ=UTC apt-get update && \
+    apt-get install -y --no-install-recommends tzdata && \
+    ln -fs /usr/share/zoneinfo/UTC /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata
 
 # Install Build Tools
 RUN sudo apt-get install -y \
@@ -35,9 +33,9 @@ RUN sudo apt-get install -y \
   ninja-build \
   pybind11-dev \
   python3 \
+  python3-full \
   python3-numpy \
   python3-pip \
-  python3-full \
   python3-pybind11 \
   python3-yaml \
   unzip \
