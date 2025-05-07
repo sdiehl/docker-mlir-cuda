@@ -69,7 +69,7 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
 # Install MLIR Python bindings
 RUN if [ "$(lsb_release -cs)" = "jammy" ]; then \
-      pip install --system mlir-python-bindings -f https://github.com/makslevental/mlir-wheels/releases/expanded_assets/latest; \
+      pip install mlir-python-bindings -f https://github.com/makslevental/mlir-wheels/releases/expanded_assets/latest; \
     else \
       pip install --break-system-packages mlir-python-bindings -f https://github.com/makslevental/mlir-wheels/releases/expanded_assets/latest; \
     fi
