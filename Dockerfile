@@ -36,8 +36,16 @@ RUN sudo apt-get install -y \
 
 # Install LLVM and MLIR tools
 RUN wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
-RUN add-apt-repository "deb http://apt.llvm.org/noble/ llvm-toolchain-noble-${MLIR_VERSION} main"
-RUN add-apt-repository "deb-src http://apt.llvm.org/noble/ llvm-toolchain-noble-${MLIR_VERSION} main"
+
+# Set LLVM repository based on Ubuntu version
+RUN if [ "$(lsb_release -cs)" = "jammy" ]; then \
+      add-apt-repository "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-${MLIR_VERSION} main" && \
+      add-apt-repository "deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy-${MLIR_VERSION} main"; \
+    else \
+      add-apt-repository "deb http://apt.llvm.org/noble/ llvm-toolchain-noble-${MLIR_VERSION} main" && \
+      add-apt-repository "deb-src http://apt.llvm.org/noble/ llvm-toolchain-noble-${MLIR_VERSION} main"; \
+    fi
+
 RUN apt-get update
 RUN apt-get install -y llvm-${MLIR_VERSION} llvm-${MLIR_VERSION}-dev llvm-${MLIR_VERSION}-tools mlir-${MLIR_VERSION}-tools
 RUN ln -s /usr/bin/llc-${MLIR_VERSION} /usr/bin/llc
