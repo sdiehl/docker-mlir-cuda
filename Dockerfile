@@ -8,8 +8,11 @@ FROM ${BASE_IMAGE}
 ARG MLIR_VERSION
 ARG CUDA_ENABLED
 
-# Update Linux
+# Set environment variables for non-interactive installation
 ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC
+
+# Update Linux
 RUN apt-get update
 RUN apt-get install -y sudo
 
