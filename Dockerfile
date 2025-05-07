@@ -18,6 +18,8 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=UTC apt-get update && \
     ln -fs /usr/share/zoneinfo/UTC /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata
 
+RUN apt-get install -y sudo
+
 # Install Build Tools
 RUN sudo apt-get install -y \
   bash-completion \
