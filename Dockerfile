@@ -4,6 +4,10 @@ ARG CUDA_ENABLED=false
 
 FROM ${BASE_IMAGE}
 
+# Re-declare build arguments after FROM
+ARG MLIR_VERSION
+ARG CUDA_ENABLED
+
 # Update Linux
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
