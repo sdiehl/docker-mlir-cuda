@@ -8,27 +8,36 @@ To use GitHub Codespaces, just click the button below.
 
 ## Downloading
 
-Available image variants:
+The following image permutations are available:
+
+- Ubuntu 24.04
+- Ubuntu 22.04
+- With CUDA 12.8
+- No CUDA
+- MLIR 20
+- MLIR 19
 
 ### Ubuntu 24.04
+
 ```bash
 # With CUDA
-docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir-cuda-ubuntu24.04
+docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir20-cuda-ubuntu24.04
 docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir19-cuda-ubuntu24.04
 
 # Without CUDA
-docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir-ubuntu24.04
+docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir20-ubuntu24.04
 docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir19-ubuntu24.04
 ```
 
 ### Ubuntu 22.04
+
 ```bash
 # With CUDA
-docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir-cuda-ubuntu22.04
+docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir20-cuda-ubuntu22.04
 docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir19-cuda-ubuntu22.04
 
 # Without CUDA
-docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir-ubuntu22.04
+docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir20-ubuntu22.04
 docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir19-ubuntu22.04
 ```
 
