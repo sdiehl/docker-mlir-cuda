@@ -3,21 +3,63 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-    # runs-on: ubuntu-24.04-arm
-
     permissions:
       contents: read
       packages: write
+
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            cuda: true
+            mlir: 20
+            base_image: nvidia/cuda:12.8.0-cudnn-devel-ubuntu24.04
+            image_suffix: mlir-cuda-ubuntu24.04
+          - os: ubuntu-24.04
+            cuda: false
+            mlir: 20
+            base_image: ubuntu:24.04
+            image_suffix: mlir-ubuntu24.04
+          - os: ubuntu-22.04
+            cuda: true
+            mlir: 20
+            base_image: nvidia/cuda:12.8.0-cudnn-devel-ubuntu22.04
+            image_suffix: mlir-cuda-ubuntu22.04
+          - os: ubuntu-22.04
+            cuda: false
+            mlir: 20
+            base_image: ubuntu:22.04
+            image_suffix: mlir-ubuntu22.04
+          - os: ubuntu-24.04
+            cuda: true
+            mlir: 19
+            base_image: nvidia/cuda:12.8.0-cudnn-devel-ubuntu24.04
+            image_suffix: mlir19-cuda-ubuntu24.04
+          - os: ubuntu-24.04
+            cuda: false
+            mlir: 19
+            base_image: ubuntu:24.04
+            image_suffix: mlir19-ubuntu24.04
+          - os: ubuntu-22.04
+            cuda: true
+            mlir: 19
+            base_image: nvidia/cuda:12.8.0-cudnn-devel-ubuntu22.04
+            image_suffix: mlir19-cuda-ubuntu22.04
+          - os: ubuntu-22.04
+            cuda: false
+            mlir: 19
+            base_image: ubuntu:22.04
+            image_suffix: mlir19-ubuntu22.04
 
     steps:
     - uses: actions/checkout@v4
@@ -38,6 +80,10 @@ jobs:
       uses: docker/metadata-action@v5
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=raw,value=${{ matrix.image_suffix }},enable=${{ github.event_name != 'pull_request' }}
+          type=raw,value=latest-${{ matrix.image_suffix }},enable=${{ github.event_name != 'pull_request' }}
+          type=sha,format=short,enable=${{ github.event_name != 'pull_request' }}
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
@@ -46,5 +92,13 @@ jobs:
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+        build-args: |
+          BASE_IMAGE=${{ matrix.base_image }}
+          MLIR_VERSION=${{ matrix.mlir }}
+          CUDA_ENABLED=${{ matrix.cuda }}
+        cache-from: |
+          type=gha
+          type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache-${{ matrix.image_suffix }}
+        cache-to: |
+          type=gha,mode=max
+          type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache-${{ matrix.image_suffix }},mode=max
