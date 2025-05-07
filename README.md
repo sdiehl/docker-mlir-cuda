@@ -1,32 +1,45 @@
 # Dev Environment for MLIR
 
-Use if you need a one-click development container that has CUDA and MLIR
-precompiled. Because building this from source sucks so much.
+One click dev environments for MLIR with CUDA support.
 
 To use GitHub Codespaces, just click the button below.
 
 [![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/sdiehl/docker-mlir-cuda)
 
-## Contents
-
-Installs the following:
-
-1. LLVM 20
-2. MLIR (With CUDA support)
-3. nvcc
-4. cuDNN & cuBLAS
-
 ## Downloading
 
+Available image variants:
+
+### Ubuntu 24.04
 ```bash
-docker pull ghcr.io/sdiehl/docker-mlir-cuda:main
-docker run -it ghcr.io/sdiehl/docker-mlir-cuda:main bash
+# With CUDA
+docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir-cuda-ubuntu24.04
+docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir19-cuda-ubuntu24.04
+
+# Without CUDA
+docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir-ubuntu24.04
+docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir19-ubuntu24.04
+```
+
+### Ubuntu 22.04
+```bash
+# With CUDA
+docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir-cuda-ubuntu22.04
+docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir19-cuda-ubuntu22.04
+
+# Without CUDA
+docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir-ubuntu22.04
+docker pull ghcr.io/sdiehl/docker-mlir-cuda:mlir19-ubuntu22.04
+```
+
+To run any of these images:
+```bash
+docker run -it ghcr.io/sdiehl/docker-mlir-cuda:<tag> bash
 ```
 
 Or in your Dockerfile:
-
 ```Dockerfile
-FROM ghcr.io/sdiehl/docker-mlir-cuda:main
+FROM ghcr.io/sdiehl/docker-mlir-cuda:<tag>
 ```
 
 ## Building

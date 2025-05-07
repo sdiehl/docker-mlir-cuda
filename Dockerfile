@@ -59,6 +59,9 @@ RUN ln -s /usr/bin/mlir-opt-${MLIR_VERSION} /usr/bin/mlir-opt
 # Install uv for Python package management
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
+# Install MLIR Python bindings
+RUN pip install mlir-python-bindings -f https://github.com/makslevental/mlir-wheels/releases/expanded_assets/latest
+
 # Set environment variables
 ENV MLIR_VERSION=${MLIR_VERSION}
 ENV CUDA_ENABLED=${CUDA_ENABLED}

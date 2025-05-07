@@ -24,22 +24,22 @@ jobs:
             cuda: true
             mlir: 20
             base_image: nvidia/cuda:12.8.0-cudnn-devel-ubuntu24.04
-            image_suffix: mlir-cuda-ubuntu24.04
+            image_suffix: mlir20-cuda-ubuntu24.04
           - os: ubuntu-24.04
             cuda: false
             mlir: 20
             base_image: ubuntu:24.04
-            image_suffix: mlir-ubuntu24.04
+            image_suffix: mlir20-ubuntu24.04
           - os: ubuntu-22.04
             cuda: true
             mlir: 20
             base_image: nvidia/cuda:12.8.0-cudnn-devel-ubuntu22.04
-            image_suffix: mlir-cuda-ubuntu22.04
+            image_suffix: mlir20-cuda-ubuntu22.04
           - os: ubuntu-22.04
             cuda: false
             mlir: 20
             base_image: ubuntu:22.04
-            image_suffix: mlir-ubuntu22.04
+            image_suffix: mlir20-ubuntu22.04
           - os: ubuntu-24.04
             cuda: true
             mlir: 19
