@@ -32,6 +32,7 @@ RUN sudo apt-get install -y \
   python3-pip \
   python3-pybind11 \
   python3-yaml \
+  python3-pipx \
   unzip \
   wget \
   xz-utils \
@@ -60,7 +61,7 @@ RUN ln -s /usr/bin/mlir-opt-${MLIR_VERSION} /usr/bin/mlir-opt
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
 # Install MLIR Python bindings
-RUN uv pip install --system mlir-python-bindings -f https://github.com/makslevental/mlir-wheels/releases/expanded_assets/latest
+RUN pipx install mlir-python-bindings --pip-args="-f https://github.com/makslevental/mlir-wheels/releases/expanded_assets/latest"
 
 # Set environment variables
 ENV MLIR_VERSION=${MLIR_VERSION}
